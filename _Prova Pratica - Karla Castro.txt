@@ -1,0 +1,115 @@
+﻿Prova Prática
+
+
+1. Comecei adicionando duas strings, uma delas sendo nomes das cidades e outra com os dias da semana.
+
+
+ String[] cidades = {"Blumenau", "Indaial", "Penha", "Rondonópolis"};
+       String[] diasSemana = {"Segunda-Feira", "Terça-Feira", "Quarta-Feira",
+                              "Quinta-Feira", "Sexta-Feira", "Sábado", "Domingo"};
+
+
+2. Depois criei a matriz bidimensional, chamada “temp” para colocar minhas strings dentro, adicionei também o Scanner para ler as respostas do usuário.
+
+
+  double[][] temp = new double[cidades.length][diasSemana.length];
+       Scanner sc = new Scanner(System.in);
+
+
+
+
+3. Criei “length” para fazer as médias e adicionei “printf”, ele serve como o system.out.print, porém ele vai mudando sua mensagem conforme o usuário avança, por exemplo:
+
+
+Digite a temperatura em Blumenau na Quarta-Feira: 25
+Digite a temperatura em Blumenau na Quinta-Feira: 26
+Digite a temperatura em Blumenau na Sexta-Feira: 27
+Digite a temperatura em Blumenau na Sábado: 28
+Digite a temperatura em Blumenau na Domingo: 28
+Digite a temperatura em Indaial na Segunda-Feira:
+
+
+Aqui vemos que a cada resposta avança para outro dia da semana, assim continuamente até passar por tudo dentro da string “diasSemana”, depois a cidade irá mudar e a semana começará novamente
+
+
+       for (int i = 0; i < cidades.length; i++) {
+           for (int j = 0; j < diasSemana.length; j++) {
+               System.out.printf("Digite a temperatura em %s na %s: ",
+                                 cidades[i], diasSemana[j]);
+               temp[i][j] = sc.nextDouble();
+           }
+       }
+       sc.close();
+
+
+
+
+4. Sysout para mostrar a mensagem indicando a média das temperaturas, loop “for” para percorrer cada cidade definida na string “cidades”. Para cada cidade, ele soma as temperaturas registradas nos sete dias da semana, armazenadas na matriz “temp”. Em seguida, divide essa soma pelo número de dias, que é 7 para calcular a média semanal. O resultado é armazenado na variável media. Por fim, o código imprime o nome da cidade utilizando o “printf”.
+
+
+    System.out.println("\nMédias das temperaturas por cidade durante a semana:");
+       for (int i = 0; i < cidades.length; i++) {
+           double soma = 0;
+           for (int j = 0; j < diasSemana.length; j++) {
+               soma += temp[i][j];
+           }
+           double media = soma / diasSemana.length;
+           System.out.printf("%s: %.2f°C%n", cidades[i], media);
+       }
+
+
+5. Começando com Sysout para informar as cidades com a temperatura abaixo de 15 graus e depois utilizei dois loops aninhados para identificar essas cidades usando false e true, depois dele encontrar a cidade com menor temperatura o programa vai imprimir uma mensagem mostrando qual a cidade. 
+
+
+        System.out.println("\nCidades com temperaturas abaixo de 15°C");
+       for (int i = 0; i < cidades.length; i++) {
+           boolean abaixoDe15 = false;
+           for (int j = 0; j < diasSemana.length; j++) {
+               if (temp[i][j] < 15) {
+                   abaixoDe15 = true;
+                   break;
+               }
+           }
+           if (abaixoDe15) {
+               System.out.println(cidades[i]);
+           }
+       }
+
+
+
+
+6. Declarei duas variáveis: double “maiorTemp” e String “cidadeMaiorTemp”  A primeira armazena a maior temperatura encontrada até o momento, inicializada com o valor da primeira cidade no primeiro dia da semana. A segunda armazena o nome da cidade correspondente a essa maior temperatura, novamente com dois loops que percorrem todos os dias da semana, dentro do loop interno, comparei cada temperatura registrada com a maior temperatura encontrada até então. Depois do programa encontrar ele irá informar com o “printf”.
+
+
+double maiorTemp = temp[0][0];
+       String cidadeMaiorTemp = cidades[0];
+       for (int i = 0; i < cidades.length; i++) {
+           for (int j = 0; j < diasSemana.length; j++) {
+               if (temp[i][j] > maiorTemp) {
+                   maiorTemp = temp[i][j];
+                   cidadeMaiorTemp = cidades[i];
+               }
+           }
+       }
+       System.out.printf("\nCidade com a maior temperatura: %s (%.1f°C)%n", cidadeMaiorTemp, maiorTemp);
+
+
+
+
+7. Por fim, o programa vai fazer o mesmo processo com a menor temperatura e depois informar utilizando o “printf.”
+  double menorTemp = temp[0][0];
+       String cidadeMenorTemp = cidades[0];
+       for (int i = 0; i < cidades.length; i++) {
+           for (int j = 0; j < diasSemana.length; j++) {
+               if (temp[i][j] < menorTemp) {
+                   menorTemp = temp[i][j];
+                   cidadeMenorTemp = cidades[i];
+               }
+           }
+       }
+       System.out.printf("Cidade com a menor temperatura: %s (%.1f°C)%n", cidadeMenorTemp, menorTemp);
+   }
+}
+
+
+Resultado:
