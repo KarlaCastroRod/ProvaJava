@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class trabalho {
+public class DesafioFinal {
 
 public static void main(String[] args) {
  
